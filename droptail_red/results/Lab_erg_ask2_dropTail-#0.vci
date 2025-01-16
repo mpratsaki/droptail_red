@@ -1,0 +1,3444 @@
+file 13602376 1736887584                                        
+version 3
+run Lab_erg_ask2_dropTail-0-20250114-22:46:16-34856
+attr configname Lab_erg_ask2_dropTail
+attr datetime 20250114-22:46:16
+attr datetimef 20250114-224616
+attr experiment Lab_erg_ask2_dropTail
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network Lab661
+attr processid 34856
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config image-path ../../images
+config network Lab661
+config **.vector-recording true
+config **.scalar-recording true
+config **.sender*.udp.*.recordStatistics true
+config **.receiver*.udp.*.recordStatistics true
+config **.router1*.ppp[*].queue.typename DropTailQueue
+config **.router1*.ppp[*].queue.packetCapacity 5
+config **.router2*.ppp[*].queue.typename DropTailQueue
+config **.router2*.ppp[*].queue.packetCapacity 5
+config sim-time-limit 25s
+config **.vector-recording true
+config **.tcp.typename Tcp
+config **.tcp.advertisedWindow 65535
+config **.tcp.mss 1460
+config **.tcp.initialSsthresh 65536
+config **.tcp.tcpAlgorithmClass "\"TcpReno\""
+config **.sender1.numApps 1
+config **.sender1.app[0].typename TcpSessionApp
+config **.sender1.app[0].connectAddress "\"receiver1\""
+config **.sender1.app[0].connectPort 1001
+config **.sender1.app[0].tOpen 1s
+config **.sender1.app[0].sendBytes 1GB
+config **.sender2.numApps 1
+config **.sender2.app[0].typename TcpSessionApp
+config **.sender2.app[0].connectAddress "\"receiver1\""
+config **.sender2.app[0].connectPort 1001
+config **.sender2.app[0].tOpen 3s
+config **.sender2.app[0].sendBytes 1GB
+config **.sender3.numApps 1
+config **.sender3.app[0].typename TcpSessionApp
+config **.sender3.app[0].connectAddress "\"receiver3\""
+config **.sender3.app[0].connectPort 1001
+config **.sender3.app[0].tOpen 7s
+config **.sender3.app[0].sendBytes 1GB
+config **.receiver1.numApps 1
+config **.receiver1.app[0].typename TcpSinkApp
+config **.receiver1.app[0].localPort 1001
+config **.receiver2.numApps 1
+config **.receiver2.app[0].typename TcpSinkApp
+config **.receiver2.app[0].localPort 1001
+config **.receiver3.numApps 1
+config **.receiver3.app[0].typename TcpSinkApp
+config **.receiver3.app[0].localPort 1001
+
+vector 0 Lab661.router2.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 1 Lab661.router2.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 2 Lab661.router2.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 3 Lab661.router2.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 4 Lab661.router2.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 5 Lab661.router2.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 6 Lab661.router2.ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 7 Lab661.router2.ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 8 Lab661.router2.ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 9 Lab661.router2.ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 10 Lab661.router2.ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 11 Lab661.router2.ppp[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 12 Lab661.router2.ppp[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 13 Lab661.router2.ppp[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 14 Lab661.router2.ppp[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 15 Lab661.router2.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 16 Lab661.router2.ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 17 Lab661.router2.ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 18 Lab661.router2.ppp[0].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 19 Lab661.router2.ppp[0].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 20 Lab661.router2.ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 21 Lab661.router2.ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 22 Lab661.router2.ppp[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 23 Lab661.router2.ppp[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 24 Lab661.router2.ppp[1].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 25 Lab661.router2.ppp[1].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 26 Lab661.router2.ppp[1].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 27 Lab661.router2.ppp[1].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 28 Lab661.router2.ppp[1].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 29 Lab661.router2.ppp[1].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 30 Lab661.router2.ppp[1].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 31 Lab661.router2.ppp[1].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 32 Lab661.router2.ppp[1].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 33 Lab661.router2.ppp[1].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 34 Lab661.router2.ppp[1].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 35 Lab661.router2.ppp[1].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 36 Lab661.router2.ppp[1].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 37 Lab661.router2.ppp[1].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 38 Lab661.router2.ppp[1].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 39 Lab661.router2.ppp[1].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 40 Lab661.router2.ppp[1].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 41 Lab661.router2.ppp[1].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 42 Lab661.router2.ppp[1] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 43 Lab661.router2.ppp[1] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 44 Lab661.router2.ppp[2].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 45 Lab661.router2.ppp[2].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 46 Lab661.router2.ppp[2].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 47 Lab661.router2.ppp[2].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 48 Lab661.router2.ppp[2].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 49 Lab661.router2.ppp[2].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 50 Lab661.router2.ppp[2].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 51 Lab661.router2.ppp[2].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 52 Lab661.router2.ppp[2].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 53 Lab661.router2.ppp[2].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 54 Lab661.router2.ppp[2].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 55 Lab661.router2.ppp[2].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 56 Lab661.router2.ppp[2].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 57 Lab661.router2.ppp[2].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 58 Lab661.router2.ppp[2].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 59 Lab661.router2.ppp[2].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 60 Lab661.router2.ppp[2].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 61 Lab661.router2.ppp[2].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 62 Lab661.router2.ppp[2] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 63 Lab661.router2.ppp[2] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 64 Lab661.router2.ppp[3].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 65 Lab661.router2.ppp[3].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 66 Lab661.router2.ppp[3].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 67 Lab661.router2.ppp[3].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 68 Lab661.router2.ppp[3].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 69 Lab661.router2.ppp[3].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 70 Lab661.router2.ppp[3].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 71 Lab661.router2.ppp[3].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 72 Lab661.router2.ppp[3].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 73 Lab661.router2.ppp[3].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 74 Lab661.router2.ppp[3].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 75 Lab661.router2.ppp[3].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 76 Lab661.router2.ppp[3].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 77 Lab661.router2.ppp[3].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 78 Lab661.router2.ppp[3].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 79 Lab661.router2.ppp[3].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 80 Lab661.router2.ppp[3].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 81 Lab661.router2.ppp[3].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 82 Lab661.router2.ppp[3] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 83 Lab661.router2.ppp[3] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 84 Lab661.router2.ppp[4].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 85 Lab661.router2.ppp[4].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 86 Lab661.router2.ppp[4].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 87 Lab661.router2.ppp[4].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 88 Lab661.router2.ppp[4].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 89 Lab661.router2.ppp[4].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 90 Lab661.router2.ppp[4].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 91 Lab661.router2.ppp[4].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 92 Lab661.router2.ppp[4].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 93 Lab661.router2.ppp[4].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 94 Lab661.router2.ppp[4].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 95 Lab661.router2.ppp[4].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 96 Lab661.router2.ppp[4].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 97 Lab661.router2.ppp[4].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 98 Lab661.router2.ppp[4].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 99 Lab661.router2.ppp[4].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 100 Lab661.router2.ppp[4].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 101 Lab661.router2.ppp[4].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 102 Lab661.router2.ppp[4] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 103 Lab661.router2.ppp[4] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 104 Lab661.router2.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 105 Lab661.router2.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 106 Lab661.router2.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 107 Lab661.router2.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 108 Lab661.router2.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 109 Lab661.router2.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 110 Lab661.router2.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 111 Lab661.router2.ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 112 Lab661.router1.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 113 Lab661.router1.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 114 Lab661.router1.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 115 Lab661.router1.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 116 Lab661.router1.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 117 Lab661.router1.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 118 Lab661.router1.ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 119 Lab661.router1.ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 120 Lab661.router1.ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 121 Lab661.router1.ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 122 Lab661.router1.ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 123 Lab661.router1.ppp[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 124 Lab661.router1.ppp[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 125 Lab661.router1.ppp[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 126 Lab661.router1.ppp[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 127 Lab661.router1.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 128 Lab661.router1.ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 129 Lab661.router1.ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 130 Lab661.router1.ppp[0].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 131 Lab661.router1.ppp[0].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 132 Lab661.router1.ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 133 Lab661.router1.ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 134 Lab661.router1.ppp[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 135 Lab661.router1.ppp[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 136 Lab661.router1.ppp[1].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 137 Lab661.router1.ppp[1].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 138 Lab661.router1.ppp[1].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 139 Lab661.router1.ppp[1].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 140 Lab661.router1.ppp[1].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 141 Lab661.router1.ppp[1].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 142 Lab661.router1.ppp[1].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 143 Lab661.router1.ppp[1].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 144 Lab661.router1.ppp[1].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 145 Lab661.router1.ppp[1].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 146 Lab661.router1.ppp[1].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 147 Lab661.router1.ppp[1].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 148 Lab661.router1.ppp[1].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 149 Lab661.router1.ppp[1].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 150 Lab661.router1.ppp[1].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 151 Lab661.router1.ppp[1].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 152 Lab661.router1.ppp[1].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 153 Lab661.router1.ppp[1].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 154 Lab661.router1.ppp[1] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 155 Lab661.router1.ppp[1] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 156 Lab661.router1.ppp[2].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 157 Lab661.router1.ppp[2].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 158 Lab661.router1.ppp[2].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 159 Lab661.router1.ppp[2].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 160 Lab661.router1.ppp[2].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 161 Lab661.router1.ppp[2].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 162 Lab661.router1.ppp[2].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 163 Lab661.router1.ppp[2].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 164 Lab661.router1.ppp[2].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 165 Lab661.router1.ppp[2].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 166 Lab661.router1.ppp[2].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 167 Lab661.router1.ppp[2].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 168 Lab661.router1.ppp[2].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 169 Lab661.router1.ppp[2].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 170 Lab661.router1.ppp[2].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 171 Lab661.router1.ppp[2].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 172 Lab661.router1.ppp[2].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 173 Lab661.router1.ppp[2].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 174 Lab661.router1.ppp[2] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 175 Lab661.router1.ppp[2] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 176 Lab661.router1.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 177 Lab661.router1.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 178 Lab661.router1.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 179 Lab661.router1.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 180 Lab661.router1.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 181 Lab661.router1.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 182 Lab661.router1.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 183 Lab661.router1.ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 184 Lab661.sender2.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 185 Lab661.sender2.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 186 Lab661.sender2.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 187 Lab661.sender2.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 188 Lab661.sender2.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 189 Lab661.sender2.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 190 Lab661.sender2.ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 191 Lab661.sender2.ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 192 Lab661.sender2.ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 193 Lab661.sender2.ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 194 Lab661.sender2.ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 195 Lab661.sender2.ppp[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 196 Lab661.sender2.ppp[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 197 Lab661.sender2.ppp[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 198 Lab661.sender2.ppp[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 199 Lab661.sender2.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 200 Lab661.sender2.ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 201 Lab661.sender2.ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 202 Lab661.sender2.ppp[0].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 203 Lab661.sender2.ppp[0].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 204 Lab661.sender2.ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 205 Lab661.sender2.ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 206 Lab661.sender2.ppp[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 207 Lab661.sender2.ppp[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 208 Lab661.sender2.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 209 Lab661.sender2.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 210 Lab661.sender2.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 211 Lab661.sender2.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 212 Lab661.sender2.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 213 Lab661.sender2.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 214 Lab661.sender2.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 215 Lab661.sender2.ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 216 Lab661.sender2.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 217 Lab661.sender2.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 218 Lab661.sender2.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 219 Lab661.sender2.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 220 Lab661.sender2.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 221 Lab661.sender2.app[0] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 222 Lab661.sender2.app[0] packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 223 Lab661.sender2.app[0] endToEndDelay:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "end-to-end delay"
+attr unit s
+vector 224 Lab661.sender1.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 225 Lab661.sender1.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 226 Lab661.sender1.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 227 Lab661.sender1.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 228 Lab661.sender1.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 229 Lab661.sender1.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 230 Lab661.sender1.ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 231 Lab661.sender1.ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 232 Lab661.sender1.ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 233 Lab661.sender1.ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 234 Lab661.sender1.ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 235 Lab661.sender1.ppp[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 236 Lab661.sender1.ppp[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 237 Lab661.sender1.ppp[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 238 Lab661.sender1.ppp[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 239 Lab661.sender1.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 240 Lab661.sender1.ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 241 Lab661.sender1.ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 242 Lab661.sender1.ppp[0].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 243 Lab661.sender1.ppp[0].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 244 Lab661.sender1.ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 245 Lab661.sender1.ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 246 Lab661.sender1.ppp[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 247 Lab661.sender1.ppp[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 248 Lab661.sender1.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 249 Lab661.sender1.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 250 Lab661.sender1.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 251 Lab661.sender1.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 252 Lab661.sender1.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 253 Lab661.sender1.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 254 Lab661.sender1.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 255 Lab661.sender1.ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 256 Lab661.sender1.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 257 Lab661.sender1.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 258 Lab661.sender1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 259 Lab661.sender1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 260 Lab661.sender1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 261 Lab661.sender1.app[0] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 262 Lab661.sender1.app[0] packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 263 Lab661.sender1.app[0] endToEndDelay:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "end-to-end delay"
+attr unit s
+vector 264 Lab661.sender3.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 265 Lab661.sender3.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 266 Lab661.sender3.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 267 Lab661.sender3.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 268 Lab661.sender3.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 269 Lab661.sender3.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 270 Lab661.sender3.ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 271 Lab661.sender3.ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 272 Lab661.sender3.ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 273 Lab661.sender3.ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 274 Lab661.sender3.ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 275 Lab661.sender3.ppp[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 276 Lab661.sender3.ppp[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 277 Lab661.sender3.ppp[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 278 Lab661.sender3.ppp[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 279 Lab661.sender3.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 280 Lab661.sender3.ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 281 Lab661.sender3.ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 282 Lab661.sender3.ppp[0].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 283 Lab661.sender3.ppp[0].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 284 Lab661.sender3.ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 285 Lab661.sender3.ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 286 Lab661.sender3.ppp[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 287 Lab661.sender3.ppp[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 288 Lab661.sender3.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 289 Lab661.sender3.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 290 Lab661.sender3.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 291 Lab661.sender3.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 292 Lab661.sender3.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 293 Lab661.sender3.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 294 Lab661.sender3.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 295 Lab661.sender3.ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 296 Lab661.sender3.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 297 Lab661.sender3.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 298 Lab661.sender3.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 299 Lab661.sender3.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 300 Lab661.sender3.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 301 Lab661.sender3.app[0] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 302 Lab661.sender3.app[0] packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 303 Lab661.sender3.app[0] endToEndDelay:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "end-to-end delay"
+attr unit s
+vector 304 Lab661.receiver2.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 305 Lab661.receiver2.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 306 Lab661.receiver2.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 307 Lab661.receiver2.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 308 Lab661.receiver2.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 309 Lab661.receiver2.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 310 Lab661.receiver2.ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 311 Lab661.receiver2.ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 312 Lab661.receiver2.ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 313 Lab661.receiver2.ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 314 Lab661.receiver2.ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 315 Lab661.receiver2.ppp[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 316 Lab661.receiver2.ppp[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 317 Lab661.receiver2.ppp[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 318 Lab661.receiver2.ppp[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 319 Lab661.receiver2.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 320 Lab661.receiver2.ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 321 Lab661.receiver2.ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 322 Lab661.receiver2.ppp[0].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 323 Lab661.receiver2.ppp[0].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 324 Lab661.receiver2.ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 325 Lab661.receiver2.ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 326 Lab661.receiver2.ppp[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 327 Lab661.receiver2.ppp[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 328 Lab661.receiver2.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 329 Lab661.receiver2.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 330 Lab661.receiver2.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 331 Lab661.receiver2.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 332 Lab661.receiver2.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 333 Lab661.receiver2.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 334 Lab661.receiver2.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 335 Lab661.receiver2.ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 336 Lab661.receiver2.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 337 Lab661.receiver2.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 338 Lab661.receiver2.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 339 Lab661.receiver2.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 340 Lab661.receiver2.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 341 Lab661.receiver2.app[0] packetReceived:vector(packetBytes) ETV
+attr checkSignals false
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 342 Lab661.receiver2.app[0] endToEndDelay:vector ETV
+attr checkSignals false
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "end-to-end delay"
+attr unit s
+vector 343 Lab661.receiver1.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 344 Lab661.receiver1.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 345 Lab661.receiver1.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 346 Lab661.receiver1.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 347 Lab661.receiver1.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 348 Lab661.receiver1.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 349 Lab661.receiver1.ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 350 Lab661.receiver1.ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 351 Lab661.receiver1.ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 352 Lab661.receiver1.ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 353 Lab661.receiver1.ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 354 Lab661.receiver1.ppp[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 355 Lab661.receiver1.ppp[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 356 Lab661.receiver1.ppp[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 357 Lab661.receiver1.ppp[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 358 Lab661.receiver1.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 359 Lab661.receiver1.ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 360 Lab661.receiver1.ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 361 Lab661.receiver1.ppp[0].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 362 Lab661.receiver1.ppp[0].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 363 Lab661.receiver1.ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 364 Lab661.receiver1.ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 365 Lab661.receiver1.ppp[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 366 Lab661.receiver1.ppp[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 367 Lab661.receiver1.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 368 Lab661.receiver1.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 369 Lab661.receiver1.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 370 Lab661.receiver1.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 371 Lab661.receiver1.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 372 Lab661.receiver1.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 373 Lab661.receiver1.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 374 Lab661.receiver1.ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 375 Lab661.receiver1.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 376 Lab661.receiver1.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 377 Lab661.receiver1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 378 Lab661.receiver1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 379 Lab661.receiver1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 380 Lab661.receiver1.app[0] packetReceived:vector(packetBytes) ETV
+attr checkSignals false
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 381 Lab661.receiver1.app[0] endToEndDelay:vector ETV
+attr checkSignals false
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "end-to-end delay"
+attr unit s
+vector 382 Lab661.receiver3.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 383 Lab661.receiver3.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 384 Lab661.receiver3.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 385 Lab661.receiver3.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 386 Lab661.receiver3.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 387 Lab661.receiver3.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 388 Lab661.receiver3.ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 389 Lab661.receiver3.ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 390 Lab661.receiver3.ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 391 Lab661.receiver3.ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 392 Lab661.receiver3.ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 393 Lab661.receiver3.ppp[0].queue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 394 Lab661.receiver3.ppp[0].queue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 395 Lab661.receiver3.ppp[0].queue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 396 Lab661.receiver3.ppp[0].queue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 397 Lab661.receiver3.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 398 Lab661.receiver3.ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 399 Lab661.receiver3.ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 400 Lab661.receiver3.ppp[0].ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 401 Lab661.receiver3.ppp[0].ppp packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, packetBytes"
+vector 402 Lab661.receiver3.ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 403 Lab661.receiver3.ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 404 Lab661.receiver3.ppp[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 405 Lab661.receiver3.ppp[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 406 Lab661.receiver3.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 407 Lab661.receiver3.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 408 Lab661.receiver3.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 409 Lab661.receiver3.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 410 Lab661.receiver3.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 411 Lab661.receiver3.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 412 Lab661.receiver3.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 413 Lab661.receiver3.ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 414 Lab661.receiver3.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 415 Lab661.receiver3.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 416 Lab661.receiver3.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 417 Lab661.receiver3.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 418 Lab661.receiver3.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 419 Lab661.receiver3.app[0] packetReceived:vector(packetBytes) ETV
+attr checkSignals false
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 420 Lab661.receiver3.app[0] endToEndDelay:vector ETV
+attr checkSignals false
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "end-to-end delay"
+attr unit s
+vector 421 Lab661.receiver2.tcp.conn-3 state:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 422 Lab661.receiver2.tcp.conn-3 sndWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 423 Lab661.receiver2.tcp.conn-3 rcvWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 424 Lab661.receiver2.tcp.conn-3 rcvAdv:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 425 Lab661.receiver2.tcp.conn-3 sndNxt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 426 Lab661.receiver2.tcp.conn-3 sndAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 427 Lab661.receiver2.tcp.conn-3 rcvSeq:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 428 Lab661.receiver2.tcp.conn-3 rcvAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 429 Lab661.receiver2.tcp.conn-3 unacked:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 430 Lab661.receiver2.tcp.conn-3 dupAcks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 431 Lab661.receiver2.tcp.conn-3 pipe:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 432 Lab661.receiver2.tcp.conn-3 sndSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 433 Lab661.receiver2.tcp.conn-3 rcvSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 434 Lab661.receiver2.tcp.conn-3 rcvOooSeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 435 Lab661.receiver2.tcp.conn-3 rcvNASeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 436 Lab661.receiver2.tcp.conn-3 sackedBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 437 Lab661.receiver2.tcp.conn-3 tcpRcvQueueBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 438 Lab661.receiver2.tcp.conn-3 tcpRcvQueueDrops:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 439 Lab661.receiver2.tcp.conn-3 tcpRcvPayloadBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 440 Lab661.receiver2.tcp.conn-3 cwnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 441 Lab661.receiver2.tcp.conn-3 ssthresh:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 442 Lab661.receiver2.tcp.conn-3 rtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 443 Lab661.receiver2.tcp.conn-3 srtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 444 Lab661.receiver2.tcp.conn-3 rttvar:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 445 Lab661.receiver2.tcp.conn-3 rto:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 446 Lab661.receiver2.tcp.conn-3 numRtos:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 447 Lab661.receiver2.tcp.conn-3 load:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 448 Lab661.receiver2.tcp.conn-3 calcLoad:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 449 Lab661.receiver2.tcp.conn-3 markingProb:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 450 Lab661.receiver1.tcp.conn-4 state:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 451 Lab661.receiver1.tcp.conn-4 sndWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 452 Lab661.receiver1.tcp.conn-4 rcvWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 453 Lab661.receiver1.tcp.conn-4 rcvAdv:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 454 Lab661.receiver1.tcp.conn-4 sndNxt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 455 Lab661.receiver1.tcp.conn-4 sndAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 456 Lab661.receiver1.tcp.conn-4 rcvSeq:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 457 Lab661.receiver1.tcp.conn-4 rcvAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 458 Lab661.receiver1.tcp.conn-4 unacked:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 459 Lab661.receiver1.tcp.conn-4 dupAcks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 460 Lab661.receiver1.tcp.conn-4 pipe:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 461 Lab661.receiver1.tcp.conn-4 sndSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 462 Lab661.receiver1.tcp.conn-4 rcvSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 463 Lab661.receiver1.tcp.conn-4 rcvOooSeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 464 Lab661.receiver1.tcp.conn-4 rcvNASeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 465 Lab661.receiver1.tcp.conn-4 sackedBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 466 Lab661.receiver1.tcp.conn-4 tcpRcvQueueBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 467 Lab661.receiver1.tcp.conn-4 tcpRcvQueueDrops:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 468 Lab661.receiver1.tcp.conn-4 tcpRcvPayloadBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 469 Lab661.receiver1.tcp.conn-4 cwnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 470 Lab661.receiver1.tcp.conn-4 ssthresh:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 471 Lab661.receiver1.tcp.conn-4 rtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 472 Lab661.receiver1.tcp.conn-4 srtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 473 Lab661.receiver1.tcp.conn-4 rttvar:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 474 Lab661.receiver1.tcp.conn-4 rto:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 475 Lab661.receiver1.tcp.conn-4 numRtos:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 476 Lab661.receiver1.tcp.conn-4 load:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 477 Lab661.receiver1.tcp.conn-4 calcLoad:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 478 Lab661.receiver1.tcp.conn-4 markingProb:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 479 Lab661.receiver3.tcp.conn-5 state:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 480 Lab661.receiver3.tcp.conn-5 sndWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 481 Lab661.receiver3.tcp.conn-5 rcvWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 482 Lab661.receiver3.tcp.conn-5 rcvAdv:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 483 Lab661.receiver3.tcp.conn-5 sndNxt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 484 Lab661.receiver3.tcp.conn-5 sndAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 485 Lab661.receiver3.tcp.conn-5 rcvSeq:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 486 Lab661.receiver3.tcp.conn-5 rcvAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 487 Lab661.receiver3.tcp.conn-5 unacked:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 488 Lab661.receiver3.tcp.conn-5 dupAcks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 489 Lab661.receiver3.tcp.conn-5 pipe:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 490 Lab661.receiver3.tcp.conn-5 sndSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 491 Lab661.receiver3.tcp.conn-5 rcvSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 492 Lab661.receiver3.tcp.conn-5 rcvOooSeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 493 Lab661.receiver3.tcp.conn-5 rcvNASeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 494 Lab661.receiver3.tcp.conn-5 sackedBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 495 Lab661.receiver3.tcp.conn-5 tcpRcvQueueBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 496 Lab661.receiver3.tcp.conn-5 tcpRcvQueueDrops:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 497 Lab661.receiver3.tcp.conn-5 tcpRcvPayloadBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 498 Lab661.receiver3.tcp.conn-5 cwnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 499 Lab661.receiver3.tcp.conn-5 ssthresh:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 500 Lab661.receiver3.tcp.conn-5 rtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 501 Lab661.receiver3.tcp.conn-5 srtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 502 Lab661.receiver3.tcp.conn-5 rttvar:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 503 Lab661.receiver3.tcp.conn-5 rto:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 504 Lab661.receiver3.tcp.conn-5 numRtos:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 505 Lab661.receiver3.tcp.conn-5 load:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 506 Lab661.receiver3.tcp.conn-5 calcLoad:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 507 Lab661.receiver3.tcp.conn-5 markingProb:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 508 Lab661.sender1.tcp.conn-20 state:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 509 Lab661.sender1.tcp.conn-20 sndWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 510 Lab661.sender1.tcp.conn-20 rcvWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 511 Lab661.sender1.tcp.conn-20 rcvAdv:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 512 Lab661.sender1.tcp.conn-20 sndNxt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 513 Lab661.sender1.tcp.conn-20 sndAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 514 Lab661.sender1.tcp.conn-20 rcvSeq:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 515 Lab661.sender1.tcp.conn-20 rcvAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 516 Lab661.sender1.tcp.conn-20 unacked:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 517 Lab661.sender1.tcp.conn-20 dupAcks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 518 Lab661.sender1.tcp.conn-20 pipe:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 519 Lab661.sender1.tcp.conn-20 sndSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 520 Lab661.sender1.tcp.conn-20 rcvSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 521 Lab661.sender1.tcp.conn-20 rcvOooSeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 522 Lab661.sender1.tcp.conn-20 rcvNASeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 523 Lab661.sender1.tcp.conn-20 sackedBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 524 Lab661.sender1.tcp.conn-20 tcpRcvQueueBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 525 Lab661.sender1.tcp.conn-20 tcpRcvQueueDrops:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 526 Lab661.sender1.tcp.conn-20 tcpRcvPayloadBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 527 Lab661.sender1.tcp.conn-20 cwnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 528 Lab661.sender1.tcp.conn-20 ssthresh:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 529 Lab661.sender1.tcp.conn-20 rtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 530 Lab661.sender1.tcp.conn-20 srtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 531 Lab661.sender1.tcp.conn-20 rttvar:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 532 Lab661.sender1.tcp.conn-20 rto:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 533 Lab661.sender1.tcp.conn-20 numRtos:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 534 Lab661.sender1.tcp.conn-20 load:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 535 Lab661.sender1.tcp.conn-20 calcLoad:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 536 Lab661.sender1.tcp.conn-20 markingProb:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 537 Lab661.receiver1.tcp.conn-21 state:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 538 Lab661.receiver1.tcp.conn-21 sndWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 539 Lab661.receiver1.tcp.conn-21 rcvWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 540 Lab661.receiver1.tcp.conn-21 rcvAdv:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 541 Lab661.receiver1.tcp.conn-21 sndNxt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 542 Lab661.receiver1.tcp.conn-21 sndAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 543 Lab661.receiver1.tcp.conn-21 rcvSeq:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 544 Lab661.receiver1.tcp.conn-21 rcvAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 545 Lab661.receiver1.tcp.conn-21 unacked:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 546 Lab661.receiver1.tcp.conn-21 dupAcks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 547 Lab661.receiver1.tcp.conn-21 pipe:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 548 Lab661.receiver1.tcp.conn-21 sndSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 549 Lab661.receiver1.tcp.conn-21 rcvSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 550 Lab661.receiver1.tcp.conn-21 rcvOooSeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 551 Lab661.receiver1.tcp.conn-21 rcvNASeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 552 Lab661.receiver1.tcp.conn-21 sackedBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 553 Lab661.receiver1.tcp.conn-21 tcpRcvQueueBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 554 Lab661.receiver1.tcp.conn-21 tcpRcvQueueDrops:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 555 Lab661.receiver1.tcp.conn-21 tcpRcvPayloadBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 556 Lab661.receiver1.tcp.conn-21 cwnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 557 Lab661.receiver1.tcp.conn-21 ssthresh:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 558 Lab661.receiver1.tcp.conn-21 rtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 559 Lab661.receiver1.tcp.conn-21 srtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 560 Lab661.receiver1.tcp.conn-21 rttvar:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 561 Lab661.receiver1.tcp.conn-21 rto:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 562 Lab661.receiver1.tcp.conn-21 numRtos:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 563 Lab661.receiver1.tcp.conn-21 load:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 564 Lab661.receiver1.tcp.conn-21 calcLoad:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 565 Lab661.receiver1.tcp.conn-21 markingProb:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 566 Lab661.receiver1.app[0].thread_21 packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 567 Lab661.receiver1.app[0].thread_21 endToEndDelay:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "end-to-end delay"
+attr unit s
+vector 568 Lab661.sender2.tcp.conn-22 state:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 569 Lab661.sender2.tcp.conn-22 sndWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 570 Lab661.sender2.tcp.conn-22 rcvWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 571 Lab661.sender2.tcp.conn-22 rcvAdv:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 572 Lab661.sender2.tcp.conn-22 sndNxt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 573 Lab661.sender2.tcp.conn-22 sndAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 574 Lab661.sender2.tcp.conn-22 rcvSeq:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 575 Lab661.sender2.tcp.conn-22 rcvAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 576 Lab661.sender2.tcp.conn-22 unacked:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 577 Lab661.sender2.tcp.conn-22 dupAcks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 578 Lab661.sender2.tcp.conn-22 pipe:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 579 Lab661.sender2.tcp.conn-22 sndSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 580 Lab661.sender2.tcp.conn-22 rcvSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 581 Lab661.sender2.tcp.conn-22 rcvOooSeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 582 Lab661.sender2.tcp.conn-22 rcvNASeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 583 Lab661.sender2.tcp.conn-22 sackedBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 584 Lab661.sender2.tcp.conn-22 tcpRcvQueueBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 585 Lab661.sender2.tcp.conn-22 tcpRcvQueueDrops:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 586 Lab661.sender2.tcp.conn-22 tcpRcvPayloadBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 587 Lab661.sender2.tcp.conn-22 cwnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 588 Lab661.sender2.tcp.conn-22 ssthresh:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 589 Lab661.sender2.tcp.conn-22 rtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 590 Lab661.sender2.tcp.conn-22 srtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 591 Lab661.sender2.tcp.conn-22 rttvar:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 592 Lab661.sender2.tcp.conn-22 rto:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 593 Lab661.sender2.tcp.conn-22 numRtos:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 594 Lab661.sender2.tcp.conn-22 load:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 595 Lab661.sender2.tcp.conn-22 calcLoad:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 596 Lab661.sender2.tcp.conn-22 markingProb:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 597 Lab661.receiver1.tcp.conn-23 state:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 598 Lab661.receiver1.tcp.conn-23 sndWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 599 Lab661.receiver1.tcp.conn-23 rcvWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 600 Lab661.receiver1.tcp.conn-23 rcvAdv:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 601 Lab661.receiver1.tcp.conn-23 sndNxt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 602 Lab661.receiver1.tcp.conn-23 sndAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 603 Lab661.receiver1.tcp.conn-23 rcvSeq:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 604 Lab661.receiver1.tcp.conn-23 rcvAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 605 Lab661.receiver1.tcp.conn-23 unacked:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 606 Lab661.receiver1.tcp.conn-23 dupAcks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 607 Lab661.receiver1.tcp.conn-23 pipe:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 608 Lab661.receiver1.tcp.conn-23 sndSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 609 Lab661.receiver1.tcp.conn-23 rcvSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 610 Lab661.receiver1.tcp.conn-23 rcvOooSeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 611 Lab661.receiver1.tcp.conn-23 rcvNASeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 612 Lab661.receiver1.tcp.conn-23 sackedBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 613 Lab661.receiver1.tcp.conn-23 tcpRcvQueueBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 614 Lab661.receiver1.tcp.conn-23 tcpRcvQueueDrops:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 615 Lab661.receiver1.tcp.conn-23 tcpRcvPayloadBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 616 Lab661.receiver1.tcp.conn-23 cwnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 617 Lab661.receiver1.tcp.conn-23 ssthresh:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 618 Lab661.receiver1.tcp.conn-23 rtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 619 Lab661.receiver1.tcp.conn-23 srtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 620 Lab661.receiver1.tcp.conn-23 rttvar:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 621 Lab661.receiver1.tcp.conn-23 rto:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 622 Lab661.receiver1.tcp.conn-23 numRtos:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 623 Lab661.receiver1.tcp.conn-23 load:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 624 Lab661.receiver1.tcp.conn-23 calcLoad:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 625 Lab661.receiver1.tcp.conn-23 markingProb:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 626 Lab661.receiver1.app[0].thread_23 packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 627 Lab661.receiver1.app[0].thread_23 endToEndDelay:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "end-to-end delay"
+attr unit s
+vector 628 Lab661.sender3.tcp.conn-24 state:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 629 Lab661.sender3.tcp.conn-24 sndWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 630 Lab661.sender3.tcp.conn-24 rcvWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 631 Lab661.sender3.tcp.conn-24 rcvAdv:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 632 Lab661.sender3.tcp.conn-24 sndNxt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 633 Lab661.sender3.tcp.conn-24 sndAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 634 Lab661.sender3.tcp.conn-24 rcvSeq:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 635 Lab661.sender3.tcp.conn-24 rcvAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 636 Lab661.sender3.tcp.conn-24 unacked:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 637 Lab661.sender3.tcp.conn-24 dupAcks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 638 Lab661.sender3.tcp.conn-24 pipe:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 639 Lab661.sender3.tcp.conn-24 sndSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 640 Lab661.sender3.tcp.conn-24 rcvSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 641 Lab661.sender3.tcp.conn-24 rcvOooSeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 642 Lab661.sender3.tcp.conn-24 rcvNASeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 643 Lab661.sender3.tcp.conn-24 sackedBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 644 Lab661.sender3.tcp.conn-24 tcpRcvQueueBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 645 Lab661.sender3.tcp.conn-24 tcpRcvQueueDrops:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 646 Lab661.sender3.tcp.conn-24 tcpRcvPayloadBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 647 Lab661.sender3.tcp.conn-24 cwnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 648 Lab661.sender3.tcp.conn-24 ssthresh:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 649 Lab661.sender3.tcp.conn-24 rtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 650 Lab661.sender3.tcp.conn-24 srtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 651 Lab661.sender3.tcp.conn-24 rttvar:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 652 Lab661.sender3.tcp.conn-24 rto:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 653 Lab661.sender3.tcp.conn-24 numRtos:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 654 Lab661.sender3.tcp.conn-24 load:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 655 Lab661.sender3.tcp.conn-24 calcLoad:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 656 Lab661.sender3.tcp.conn-24 markingProb:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 657 Lab661.receiver3.tcp.conn-25 state:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 658 Lab661.receiver3.tcp.conn-25 sndWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 659 Lab661.receiver3.tcp.conn-25 rcvWnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 660 Lab661.receiver3.tcp.conn-25 rcvAdv:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 661 Lab661.receiver3.tcp.conn-25 sndNxt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 662 Lab661.receiver3.tcp.conn-25 sndAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 663 Lab661.receiver3.tcp.conn-25 rcvSeq:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 664 Lab661.receiver3.tcp.conn-25 rcvAck:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 665 Lab661.receiver3.tcp.conn-25 unacked:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 666 Lab661.receiver3.tcp.conn-25 dupAcks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 667 Lab661.receiver3.tcp.conn-25 pipe:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 668 Lab661.receiver3.tcp.conn-25 sndSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 669 Lab661.receiver3.tcp.conn-25 rcvSacks:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 670 Lab661.receiver3.tcp.conn-25 rcvOooSeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 671 Lab661.receiver3.tcp.conn-25 rcvNASeg:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 672 Lab661.receiver3.tcp.conn-25 sackedBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 673 Lab661.receiver3.tcp.conn-25 tcpRcvQueueBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 674 Lab661.receiver3.tcp.conn-25 tcpRcvQueueDrops:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 675 Lab661.receiver3.tcp.conn-25 tcpRcvPayloadBytes:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 676 Lab661.receiver3.tcp.conn-25 cwnd:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 677 Lab661.receiver3.tcp.conn-25 ssthresh:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 678 Lab661.receiver3.tcp.conn-25 rtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 679 Lab661.receiver3.tcp.conn-25 srtt:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 680 Lab661.receiver3.tcp.conn-25 rttvar:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 681 Lab661.receiver3.tcp.conn-25 rto:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 682 Lab661.receiver3.tcp.conn-25 numRtos:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 683 Lab661.receiver3.tcp.conn-25 load:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 684 Lab661.receiver3.tcp.conn-25 calcLoad:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 685 Lab661.receiver3.tcp.conn-25 markingProb:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+vector 686 Lab661.receiver3.app[0].thread_25 packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 687 Lab661.receiver3.app[0].thread_25 endToEndDelay:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "end-to-end delay"
+attr unit s
+626	136578 87092 1604 151914 3.199496 24.996764 3528 1460 1460 5150880 7520284800
+627	223670 102311 1604 151914 3.199496 24.996764 3528 0.078272 21.87554 39665.878548 579087.99363376
+566	325981 847 68 5287 1.194344 4.45334 31 1460 17520 67160 396477600
+567	326828 1640 68 5287 1.194344 4.45334 46 0.073437333334 3.332433333334 66.2196880001 163.60513172522
+686	328468 63879 18222 151896 7.1270984 24.994828081753 2037 1460 29200 3311280 14098402400
+687	392347 94816 18222 151896 7.1270984 24.994828081753 2268 0.0466496 17.914379281753 23676.497486163 290913.09898712
+4	487163 59857 0 151919 0 24.996932081753 2280 0 0 0 0
+5	547020 59857 0 151919 0 24.996932081753 2280 0 0 0 0
+6	606877 59817 17870 151919 7.0604284 24.996932081753 2275 0 0 0 0
+7	666694 64367 17870 151919 7.0604284 24.996932081753 2275 320 352 728032 232981504
+8	731061 4312 17870 151943 0.1 25 250 0 54400 7280320 351285350400
+9	735373 64367 17870 151919 7.0604284 24.996932081753 2275 320 352 728032 232981504
+10	799740 4562 17870 151943 0.1 25 250 0 54400 7280320 351285350400
+15	804302 124190 0 151920 0 24.996950881753 4551 0 1 2275 2275
+16	928492 64367 17870 151919 7.0604284 24.996932081753 2275 47 51 106929 5025867
+17	992859 69814 17663 151908 7.0200204 24.995357681753 2307 47 1507 3473733 5234772755
+20	1062673 64367 17870 151919 7.0604284 24.996932081753 2275 40 44 91004 3640336
+21	1127040 69814 17663 151908 7.0200204 24.995357681753 2307 40 1500 3457584 5186253536
+24	1196854 74305 0 151935 0 24.998868 3587 0 0 0 0
+25	1271159 74305 0 151935 0 24.998868 3587 0 0 0 0
+26	1345464 74260 25 151935 1.080657333333 24.998868 3582 0 0 0 0
+27	1419724 81424 25 151935 1.080657333333 24.998868 3582 320 352 1146304 366839808
+28	1501148 4743 25 151943 0.1 25 250 0 54400 11463040 601051340800
+29	1505891 81424 25 151935 1.080657333333 24.998868 3582 320 352 1146304 366839808
+30	1587315 4743 25 151943 0.1 25 250 0 54400 11463040 601051340800
+35	1592058 148526 0 151941 0 24.999056 7165 0 1 3582 3582
+36	1740584 77842 25 151935 1.080657333333 24.998868 3582 47 51 168362 7913422
+37	1818426 85188 13 151899 1.040249333333 24.994848 3591 47 1507 5405805 8146262383
+40	1903614 77842 25 151935 1.080657333333 24.998868 3582 40 44 143288 5731872
+41	1981456 85188 13 151899 1.040249333333 24.994848 3591 40 1500 5380668 8070757072
+44	2066644 74468 0 151902 0 24.994848 3596 0 0 0 0
+45	2141112 74468 0 151902 0 24.994848 3596 0 0 0 0
+46	2215580 74423 15 151902 1.040249333333 24.994848 3591 0 0 0 0
+47	2290003 88779 15 151902 1.040249333333 24.994848 3591 320 12000 43045344 516528452608
+48	2378782 5192 15 151943 0.1 25 250 0 2040000 430453440 8.469663812608e+14
+49	2383974 88779 15 151902 1.040249333333 24.994848 3591 320 12000 43045344 516528452608
+50	2472753 5192 15 151943 0.1 25 250 0 2040000 430453440 8.469663812608e+14
+55	2477945 148841 0 151902 0 24.994848 7182 0 1 3591 3591
+56	2626786 85188 15 151902 1.040249333333 24.994848 3591 47 1507 5405805 8146262383
+57	2711974 77842 23 151933 1.080657333333 24.998868 3582 47 51 168362 7913422
+60	2789816 85188 15 151902 1.040249333333 24.994848 3591 40 1500 5380668 8070757072
+61	2875004 77842 23 151933 1.080657333333 24.998868 3582 40 44 143288 5731872
+64	2952846 45 0 0 0 0 5 0 0 0 0
+65	2952891 45 0 0 0 0 5 0 0 0 0
+68	2952936 4101 151943 151943 0.1 25 250 0 0 0 0
+70	2957037 4101 151943 151943 0.1 25 250 0 0 0 0
+75	2961138 9 0 0 0 0 1 0 0 0 0
+84	2961147 106060 0 151936 0 24.998940081753 3892 0 5 8008 29058
+85	3067207 117004 0 151936 0 24.998940081753 3892 0 60000 96096000 4184352000000
+86	3184211 74735 17665 151936 7.0200204 24.998940081753 2284 0 0.03014 25.369464 0.53875605523968
+87	3258946 72121 17665 151910 7.0200204 24.995357681753 2307 320 12000 27660672 331920226304
+88	3331067 4874 17665 151943 0.1 25 250 0 2640000 276606720 5.150759266304e+14
+89	3335941 71459 17665 151936 7.0200204 24.998940081753 2284 320 12000 27384672 328608226304
+90	3407400 4877 17665 151943 0.1 25 250 0 2040000 273846720 4.953047266304e+14
+91	3412277 571 20312 143813 7.4791636 23.974610881753 20 12000 12000 240000 2880000000
+95	3412848 124636 0 151936 0 24.998940081753 4568 0 1 2284 2284
+96	3537484 69175 17665 151936 7.0200204 24.998940081753 2284 47 1507 3439072 5182538628
+97	3606659 64367 17868 151917 7.0604284 24.996932081753 2275 47 51 106929 5025867
+100	3671026 71459 17665 151936 7.0200204 24.998940081753 2284 40 1500 3423084 5134503536
+101	3742485 66642 17868 151917 7.0604284 24.996932081753 2275 40 44 91004 3640336
+116	3809127 1422 0 5513 0 4.499744 61 0 0 0 0
+117	3810549 1422 0 5513 0 4.499744 61 0 0 0 0
+118	3811971 1372 29 5513 1.100861333333 4.499744 56 0 0 0 0
+119	3813343 1484 29 5513 1.100861333333 4.499744 56 320 352 17952 5755904
+120	3814827 4281 29 151943 0.1 25 250 0 51200 179520 4692070400
+121	3819108 1484 29 5513 1.100861333333 4.499744 56 320 352 17952 5755904
+122	3820592 4281 29 151943 0.1 25 250 0 51200 179520 4692070400
+127	3824873 2799 0 5514 0 4.499785777778 113 0 1 56 56
+128	3827672 1428 29 5513 1.100861333333 4.499744 56 47 51 2636 124096
+129	3829100 2043 9 71499 1.020045333333 14.959006665422 73 47 1507 107095 161249289
+132	3831143 1428 29 5513 1.100861333333 4.499744 56 40 44 2244 89936
+133	3832571 2043 9 71499 1.020045333333 14.959006665422 73 40 1500 106584 159753536
+136	3834614 76436 0 151905 0 24.994944 3527 0 0 0 0
+137	3911050 76436 0 151905 0 24.994944 3527 0 0 0 0
+138	3987486 76386 1563 151905 3.10102 24.994944 3522 0 0 0 0
+139	4063872 83430 1563 151905 3.10102 24.994944 3522 320 352 1127072 360674304
+140	4147302 4980 1563 151943 0.1 25 250 0 54400 11270720 595089510400
+141	4152282 83430 1563 151905 3.10102 24.994944 3522 320 352 1127072 360674304
+142	4235712 4980 1563 151943 0.1 25 250 0 54400 11270720 595089510400
+147	4240692 152782 0 151907 0 24.995132 7045 0 1 3522 3522
+148	4393474 79908 1563 151905 3.10102 24.994944 3522 47 51 165538 7780490
+149	4473382 87449 1543 151937 3.020204 24.99896 3544 47 1507 5337892 8044060368
+152	4560831 79908 1563 151905 3.10102 24.994944 3522 40 44 140884 5635536
+153	4640739 87449 1543 151937 3.020204 24.99896 3544 40 1500 5313084 7969503536
+156	4728188 154963 0 151940 0 24.99896 7128 0 5 31221 141749
+157	4883151 182967 0 151940 0 24.99896 7128 0 60000 374652000 20411856000000
+158	5066118 99356 11 151938 1.020045333333 24.99896 3596 0 0.03014 104.28698475175 3.1290258192587
+159	5165474 93110 11 151940 1.020045333333 24.99896 3617 320 12000 43357344 520272452608
+160	5258584 5442 11 151943 0.1 25 250 0 2640000 433573440 8.597247812608e+14
+161	5264026 92485 11 151938 1.020045333333 24.99896 3596 320 12000 43105344 517248452608
+162	5356511 5443 11 151943 0.1 25 250 0 2040000 431053440 8.495439812608e+14
+163	5361954 478 580 71501 1.709020888892 14.959006665422 16 12000 12000 192000 2304000000
+167	5362432 156208 0 151938 0 24.99896 7192 0 1 3596 3596
+168	5518640 88889 11 151938 1.020045333333 24.99896 3596 47 1507 5413340 8157617628
+169	5607529 81336 27 151903 1.100861333333 24.994944 3578 47 51 168174 7904586
+172	5688865 88889 11 151938 1.020045333333 24.99896 3596 40 1500 5388168 8082007072
+173	5777754 81336 27 151903 1.100861333333 24.994944 3578 40 44 143128 5725472
+188	5859090 161035 0 151927 0 24.997048 7110 0 21 109517 1707329
+189	6020125 189397 0 151927 0 24.997048 7110 0 252000 1314204000 2.45855376e+14
+190	6209522 101622 1541 151922 3 24.997044 3548 0 0.126584 339.60377600001 32.882307136
+191	6311144 91460 1541 151927 3 24.997048 3564 320 12000 42744672 512928226304
+192	6402604 5422 1541 151943 0.1 25 250 0 3600000 427446720 8.535175906304e+14
+193	6408026 91085 1541 151922 3 24.997044 3548 320 12000 42552672 510624226304
+194	6499111 5423 1541 151943 0.1 25 250 0 2040000 425526720 8.434375906304e+14
+199	6504534 153789 0 151922 0 24.997044 7096 0 1 3548 3548
+200	6658323 87537 1541 151922 3 24.997044 3548 47 1507 5343920 8053144564
+201	6745860 79846 1565 151923 3.121224 24.997048 3519 47 51 165397 7773863
+204	6825706 87537 1541 151922 3 24.997044 3548 40 1500 5319084 7978503536
+205	6913243 79846 1565 151923 3.121224 24.997048 3519 40 44 140764 5630736
+218	6993089 10 0 0 0 0 1 0 0 0 0
+219	6993099 10 0 0 0 0 1 0 0 0 0
+220	6993109 10 0 0 0 0 1 0 0 0 0
+222	6993119 29 1571 1571 3.121224 3.121224 1 1000000000 1000000000 1000000000 1e+18
+228	6993148 2651 0 71324 0 14.937667109866 110 0 2 36 40
+229	6995799 2787 0 71324 0 14.937667109866 110 0 24000 432000 5760000000
+230	6998586 2221 7 71324 1 14.937667109866 73 0 0.002679111112 0.044247111126 6.6394881624322e-05
+231	7000807 2099 7 71324 1 14.937667109866 73 320 12000 852672 10224226304
+232	7002906 4207 7 151943 0.1 25 250 0 2160000 8526720 10383190630400
+233	7007113 2094 7 71324 1 14.937667109866 73 320 12000 852672 10224226304
+234	7009207 4207 7 151943 0.1 25 250 0 2160000 8526720 10383190630400
+239	7013414 3637 0 71333 0 14.939006665422 147 0 1 73 73
+240	7017051 2021 7 71324 1 14.937667109866 73 47 1507 107095 161249289
+241	7019072 1475 31 5615 1.120906666666 4.519785777778 56 47 51 2636 124096
+244	7020547 2021 7 71324 1 14.937667109866 73 40 1500 106584 159753536
+245	7022568 1475 31 5615 1.120906666666 4.519785777778 56 40 44 2244 89936
+258	7024043 10 0 0 0 0 1 0 0 0 0
+259	7024053 10 0 0 0 0 1 0 0 0 0
+260	7024063 10 0 0 0 0 1 0 0 0 0
+262	7024073 33 37 37 1.120906666666 1.120906666666 1 1000000000 1000000000 1000000000 1e+18
+268	7024106 69827 0 151932 0 24.998866881753 2480 0 3 174 188
+269	7093933 70499 0 151932 0 24.998866881753 2480 0 36000 2088000 27072000000
+270	7164432 66621 17566 151932 7 24.998866881753 2311 0 0.0018084 0.1012892 6.540656464e-05
+271	7231053 74542 17566 151932 7 24.998866881753 2311 320 12000 27708672 332496226304
+272	7305595 5121 17566 151943 0.1 25 250 0 2640000 277086720 5.159680579584e+14
+273	7310716 74550 17566 151932 7 24.998866881753 2311 320 12000 27708672 332496226304
+274	7385266 5121 17566 151943 0.1 25 250 0 2640000 277086720 5.159680579584e+14
+279	7390387 130636 0 151942 0 24.999469681753 4623 0 1 2311 2311
+280	7521023 72239 17566 151932 7 24.998866881753 2311 47 1507 3479761 5243856951
+281	7593262 66554 17967 151928 7.0804488 24.998866881753 2272 47 51 106788 5019240
+284	7659816 72239 17566 151932 7 24.998866881753 2311 40 1500 3463584 5195253536
+285	7732055 66554 17967 151928 7.0804488 24.998866881753 2272 40 44 90884 3635536
+298	7798609 10 0 0 0 0 1 0 0 0 0
+299	7798619 10 0 0 0 0 1 0 0 0 0
+300	7798629 10 0 0 0 0 1 0 0 0 0
+302	7798639 31 17973 17973 7.0804488 7.0804488 1 1000000000 1000000000 1000000000 1e+18
+308	7798670 50 0 0 0 0 5 0 0 0 0
+309	7798720 50 0 0 0 0 5 0 0 0 0
+312	7798770 4351 151943 151943 0.1 25 250 0 0 0 0
+314	7803121 4351 151943 151943 0.1 25 250 0 0 0 0
+319	7807472 10 0 0 0 0 1 0 0 0 0
+338	7807482 10 0 0 0 0 1 0 0 0 0
+339	7807492 10 0 0 0 0 1 0 0 0 0
+340	7807502 10 0 0 0 0 1 0 0 0 0
+347	7807512 77949 0 151916 0 24.996764 3590 0 0 0 0
+348	7885461 77949 0 151916 0 24.996764 3590 0 0 0 0
+349	7963410 77899 21 151916 1.060453333333 24.996764 3585 0 0 0 0
+350	8041309 85069 21 151916 1.060453333333 24.996764 3585 320 352 1147264 367147008
+351	8126378 4991 21 151943 0.1 25 250 0 54400 11472640 601655500800
+352	8131369 85069 21 151916 1.060453333333 24.996764 3585 320 352 1147264 367147008
+353	8216438 4991 21 151943 0.1 25 250 0 54400 11472640 601655500800
+358	8221429 155809 0 151921 0 24.996952 7171 0 1 3585 3585
+359	8377238 81484 21 151916 1.060453333333 24.996764 3585 47 51 168503 7920049
+360	8458722 88695 17 151911 1.060453333333 24.996764 3587 47 1507 5399777 8137178187
+363	8547417 81484 21 151916 1.060453333333 24.996764 3585 40 44 143408 5736672
+364	8628901 88695 17 151911 1.060453333333 24.996764 3587 40 1500 5374668 8061757072
+377	8717596 10 0 0 0 0 1 0 0 0 0
+378	8717606 10 0 0 0 0 1 0 0 0 0
+379	8717616 10 0 0 0 0 1 0 0 0 0
+380	8717626 87939 68 151914 1.194344 24.996764 3559 1460 17520 5218040 7916762400
+381	8805565 103951 68 151914 1.194344 24.996764 3574 0.073437333334 21.87554 39732.098236 579251.59876548
+386	8909516 64498 0 151898 0 24.994828081753 2283 0 0 0 0
+387	8974014 64498 0 151898 0 24.994828081753 2283 0 0 0 0
+388	9038512 64448 17771 151898 7.0402244 24.994828081753 2278 0 0 0 0
+389	9102960 69004 17771 151898 7.0402244 24.994828081753 2278 320 352 728992 233288704
+390	9171964 4812 17771 151943 0.1 25 250 0 54400 7289920 351438950400
+391	9176776 69004 17771 151898 7.0402244 24.994828081753 2278 320 352 728992 233288704
+392	9245780 4812 17771 151943 0.1 25 250 0 54400 7289920 351438950400
+397	9250592 128907 0 151906 0 24.995016081753 4557 0 1 2278 2278
+398	9379499 66726 17771 151898 7.0402244 24.994828081753 2278 47 51 107070 5032494
+399	9446225 71302 17767 151893 7.0402244 24.994828081753 2279 47 1507 3431537 5171183383
+402	9517527 66726 17771 151898 7.0402244 24.994828081753 2278 40 44 91124 3645136
+403	9584253 71302 17767 151893 7.0402244 24.994828081753 2279 40 1500 3415584 5123253536
+416	9655555 10 0 0 0 0 1 0 0 0 0
+417	9655565 10 0 0 0 0 1 0 0 0 0
+418	9655575 10 0 0 0 0 1 0 0 0 0
+419	9655585 63879 18222 151896 7.1270984 24.994828081753 2037 1460 29200 3311280 14098402400
+420	9719464 94816 18222 151896 7.1270984 24.994828081753 2268 0.0466496 17.914379281753 23676.497486163 290913.09898712
+456	9814280 54 19 1553 1.060453333333 3.060612 2 250000 750000 1000000 625000000000
+457	9814334 44 19 1553 1.060453333333 3.060612 2 0 0 0 0
+468	9814378 44 19 1553 1.060453333333 3.060612 2 0 0 0 0
+485	9814422 28 17769 17769 7.0402244 7.0402244 1 1750000 1750000 1750000 3062500000000
+486	9814450 22 17769 17769 7.0402244 7.0402244 1 0 0 0 0
+497	9814472 22 17769 17769 7.0402244 7.0402244 1 0 0 0 0
+509	9814494 1643 33 5617 1.120906666666 4.519785777778 56 52395 65535 3592580 231099770800
+510	9816137 2103 5 71322 1 14.937667109866 73 65535 65535 4784055 313523044425
+511	9818240 2204 5 71322 1 14.937667109866 74 65535 330649 24202912 7985294403898
+512	9820444 2132 38 71322 1.120906666666 14.937667109866 71 250001 331761 20935791 6212500196311
+513	9822576 2171 5 71322 1 14.937667109866 73 0 265114 19088208 5060551175712
+514	9824747 1699 33 5617 1.120906666666 4.519785777778 56 265113 265114 14846383 3935983717549
+515	9826446 1699 33 5617 1.120906666666 4.519785777778 56 250001 317161 15768116 4454525837376
+516	9828145 1862 38 5581 1.120906666666 4.513757777778 65 0 45260 1394300 39521995600
+517	9830007 1404 82 5617 1.254761777778 4.519785777778 55 0 18 183 2141
+524	9831411 1811 5 71322 1 14.937667109866 73 0 0 0 0
+526	9833222 1419 33 5617 1.120906666666 4.519785777778 56 0 0 0 0
+527	9834641 1545 82 71322 1.254761777778 14.937667109866 53 1460 45990 1189535 36144342175
+528	9836186 1010 82 71322 1.254761777778 14.937667109866 35 2920 65536 1761969 112277435337
+529	9837196 254 82 5581 1.254761777778 4.513757777778 7 0.133813333334 0.156728 0.970508444448 0.13503487705063
+530	9837450 266 82 5581 1.254761777778 4.513757777778 7 0.016731888889 0.085319729172 0.373270340249 0.023452793090774
+531	9837716 265 82 5581 1.254761777778 4.513757777778 7 0.350952543853 0.672981888889 3.475890026398 1.8072706833513
+532	9837981 265 82 5581 1.254761777778 4.513757777778 7 1.489129904584 2.708659444445 14.276830445841 30.286796951071
+533	9838246 107 3447 71322 4.075858803799 14.937667109866 4 1 4 10 30
+538	9838353 56 19 61 1.060453333333 1.181324444444 2 65535 65535 131070 8589672450
+539	9838409 1594 19 5315 1.060453333333 4.459368 56 52395 65535 3592580 231099770800
+540	9840003 1679 19 5315 1.060453333333 4.459368 57 315536 372476 19676232 6804161821632
+542	9841682 1650 19 5315 1.060453333333 4.459368 56 250001 317161 15768116 4454525837376
+543	9843332 1650 61 5315 1.181324444444 4.459368 56 250001 331761 16172536 4702158910616
+544	9844982 1650 61 5315 1.181324444444 4.459368 56 265114 265114 14846384 3935984247776
+545	9846632 24 61 61 1.181324444444 1.181324444444 1 0 0 0 0
+546	9846656 1307 67 5286 1.194344 4.45334 53 0 0 0 0
+550	9847963 567 790 1461 1.795905333336 2.087644000004 22 1 22 253 3795
+551	9848530 39 4548 5315 4.30264 4.459368 2 1 2 3 5
+553	9848569 2885 19 5315 1.060453333333 4.459368 109 0 30660 916880 19397560000
+555	9851454 1535 61 5315 1.181324444444 4.459368 56 0 1460 80300 117238000
+569	9852989 90403 1567 151925 3.121224 24.997048 3519 65535 65535 230617665 15113528675775
+570	9943392 91464 1539 151925 3 24.997048 3564 65535 65535 233566740 15306796305900
+571	10034856 95052 1539 151925 3 24.997048 3565 65535 830689 2960641131 2.4593218761019e+15
+572	10129908 98375 1572 151925 3.121224 24.997048 3562 750001 5949061 11931029422 4.7991330966433e+16
+573	10228283 95023 1539 151925 3 24.997048 3564 0 765154 2726243702 2.0859962735601e+15
+574	10323306 93922 1567 151925 3.121224 24.997048 3519 765153 765154 2692576925 2.0602360037063e+15
+575	10417228 97269 1567 151925 3.121224 24.997048 3519 750001 5886281 11676538179 4.6485135623916e+16
+576	10514497 180766 1572 151925 3.121224 24.997048 7037 0 64240 444158280 28153810428000
+577	10695263 76307 1618 151925 3.26006 24.997048 3518 0 0 0 0
+584	10771570 77208 1539 151925 3 24.997048 3564 0 0 0 0
+586	10848778 76327 1567 151925 3.121224 24.997048 3519 0 0 0 0
+587	10925105 92488 1618 151925 3.26006 24.997048 3518 2920 136938 368427105 40227546974191
+588	11017593 90379 1618 151925 3.26006 24.997048 3518 65536 65536 230555648 15109694947328
+589	11107972 2427 1618 150819 3.26006 24.864432 85 0.138648 0.283316 21.743208 5.656206282656
+590	11110399 2923 1618 150819 3.26006 24.864432 85 0.0173545 0.265226915162 19.886619593925 4.9761667534648
+591	11113322 2919 1618 150819 3.26006 24.864432 85 6.7484361e-05 0.6736045 7.371342930779 2.5485652462462
+592	11116241 2007 1618 150819 3.26006 24.864432 85 1 2.7117725 94.03891159443 112.47212452189
+598	11118248 48 1553 1597 3.060612 3.181788 2 65535 65535 131070 8589672450
+599	11118296 90644 1553 151913 3.060612 24.996764 3529 65535 65535 231273015 15156477038025
+600	11208940 97600 1553 151913 3.060612 24.996764 3530 815536 5966416 11967569840 4.8386555929976e+16
+602	11306540 97530 1553 151913 3.060612 24.996764 3529 750001 5900881 11735481289 4.683256482142e+16
+603	11404070 97529 1597 151913 3.181788 24.996764 3529 750001 5899421 11730330409 4.6798306926344e+16
+604	11501599 94173 1597 151913 3.181788 24.996764 3529 765154 765154 2700228466 2.0660906116738e+15
+605	11595772 20 1597 1597 3.181788 3.181788 1 0 0 0 0
+606	11595792 76508 1603 151913 3.199496 24.996764 3528 0 0 0 0
+613	11672300 153036 1553 151913 3.060612 24.996764 7057 0 0 0 0
+615	11825336 87112 1597 151913 3.181788 24.996764 3529 0 1460 5150880 7520284800
+629	11912448 73370 17969 151930 7.0804488 24.998866881753 2272 52395 65535 148774340 9743044245800
+630	11985818 74546 17564 151930 7 24.998866881753 2311 65535 65535 151451385 9925366515975
+631	12060364 79194 17564 151930 7 24.998866881753 2312 65535 1825592 4219008647 7.7020730885585e+15
+632	12139558 79120 17974 151930 7.0804488 24.998866881753 2309 1750001 5077341 7854373049 2.8876768200607e+16
+633	12218678 79162 17564 151930 7 24.998866881753 2311 0 1760057 4065731670 7.1559194859052e+15
+634	12297840 77914 17969 151930 7.0804488 24.998866881753 2272 1760056 1760057 3998849503 7.0382030579416e+15
+635	12375754 77914 17969 151930 7.0804488 24.998866881753 2272 1750001 5052521 7709966872 2.8245212885366e+16
+636	12453668 134598 17974 151930 7.0804488 24.998866881753 4163 0 45260 92115780 2165247306000
+637	12588266 64379 18427 151930 7.1673052 24.998866881753 2271 0 19 2283 29329
+644	12652645 65302 17564 151930 7 24.998866881753 2311 0 0 0 0
+646	12717947 64282 17969 151930 7.0804488 24.998866881753 2272 0 0 0 0
+647	12782229 72271 18427 151930 7.1673052 24.998866881753 2238 1460 45990 53630339 1360792211799
+648	12854500 65511 18427 151930 7.1673052 24.998866881753 2032 3591 65536 29745294 530811271362
+649	12920011 5682 18427 151424 7.1673052 24.938586881753 159 0.012056 0.21098 15.7060548 1.598894835684
+650	12925693 6533 18427 151424 7.1673052 24.938586881753 159 0.01085705 0.107833317983 15.013320429463 1.4636433530263
+651	12932226 6521 18427 151424 7.1673052 24.938586881753 159 0.008590656699 0.66710705 7.543610627212 2.1512595710334
+652	12938747 4590 18427 151424 7.1673052 24.938586881753 159 1 2.67928525 166.04317947042 180.94525071367
+653	12943337 27 31046 31046 9.567845281753 9.567845281753 1 1 1 1 1
+658	12943364 52 17769 18186 7.0402244 7.1206556 2 65535 65535 131070 8589672450
+659	12943416 73559 17769 151895 7.0402244 24.994828081753 2278 52395 65535 149167550 9768813263150
+660	13016975 78143 17769 151895 7.0402244 24.994828081753 2279 1815536 5126816 7891295744 2.9425838920478e+16
+662	13095118 78115 17769 151895 7.0402244 24.994828081753 2278 1750001 5061281 7740312658 2.8398690710662e+16
+663	13173233 78115 18186 151895 7.1206556 24.994828081753 2278 1750001 5059821 7740500998 2.8399172605209e+16
+664	13251348 78115 18186 151895 7.1206556 24.994828081753 2278 1760057 1760057 4009409846 7.0567898653212e+15
+665	13329463 22 18186 18186 7.1206556 7.1206556 1 0 0 0 0
+666	13329485 64181 18221 151895 7.1270984 24.994828081753 2268 0 0 0 0
+670	13393666 6780 20791 145130 7.5407568 24.142262481753 231 1 231 26796 4135516
+671	13400446 244 31758 33887 9.707341681753 10.078804081753 9 1 9 45 285
+673	13400690 130407 17769 151895 7.0402244 24.994828081753 4546 0 30660 7095600 135825552000
+675	13531097 71278 18186 151895 7.1206556 24.994828081753 2278 0 1460 3324420 4853653200
+
